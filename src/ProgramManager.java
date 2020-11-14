@@ -21,7 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
+// TODO: 11/14/2020 Populate array lists from data files
+// TODO: 11/14/2020 when removing items remove from both array lists and data files  
 import java.util.ArrayList;
 import java.util.Scanner;
 

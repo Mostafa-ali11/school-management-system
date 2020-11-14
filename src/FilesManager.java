@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 // TODO: 11/14/2020 Handle the error cases
-// TODO: 11/14/2020 Create "data" directory if it doesn't exist 
+// TODO: 11/14/2020 Create "data" directory if it doesn't exist
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
