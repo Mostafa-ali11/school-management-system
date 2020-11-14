@@ -25,7 +25,22 @@
 // TODO: 11/10/2020 Add the ability to read and write to files to save data permanently.
 public class School {
     public static void main(String[] args) {
-        Prompter prompter = new Prompter();
+
+        String studentsFileName;
+        String teachersFileName;
+        String financesFileName;
+
+        if (args.length != 3) {
+            System.out.println("Usage: java School <studentsFileName> <teachersFileName> <financesFileName>");
+            return;
+        } else {
+            studentsFileName = args[0];
+            teachersFileName = args[1];
+            financesFileName = args[2];
+        }
+
+        FilesManager filesManager = new FilesManager(studentsFileName, teachersFileName, financesFileName);
+        Prompter prompter = new Prompter(filesManager);
         prompter.startProgram();
     }
 }

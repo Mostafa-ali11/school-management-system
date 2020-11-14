@@ -34,10 +34,13 @@ public class Prompter {
     private final ArrayList<Teacher> teachers = new ArrayList<>();
     private final ArrayList<Student> students = new ArrayList<>();
     private final ArrayList<Expense> expenses = new ArrayList<>();
-
     Scanner menuInput = new Scanner(System.in);
     Scanner personInput = new Scanner(System.in);
-    ProgramManager programManager = new ProgramManager();
+    ProgramManager programManager;
+
+    public Prompter(FilesManager filesManager) {
+        programManager = new ProgramManager(filesManager);
+    }
 
     public void startProgram() {
         System.out.println("Welcome to the School Management System!");
@@ -84,7 +87,7 @@ public class Prompter {
                     programManager.viewTeachers(teachers);
                     break;
                 case 2:
-                    teachers.add(programManager.createTeacher(personInput));
+                    programManager.createTeacher(personInput, teachers);
                     break;
                 case 3:
                     programManager.removeTeacher(teachers, personInput);
@@ -110,7 +113,7 @@ public class Prompter {
                     programManager.viewStudents(students);
                     break;
                 case 2:
-                    students.add(programManager.createStudent(personInput));
+                    programManager.createStudent(personInput, students);
                     break;
                 case 3:
                     programManager.removeStudent(students, personInput);

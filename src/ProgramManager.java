@@ -27,8 +27,14 @@ import java.util.Scanner;
 
 public class ProgramManager {
 
+    private final FilesManager filesManager;
+
+    public ProgramManager(FilesManager filesManager) {
+        this.filesManager = filesManager;
+    }
+
     //////////////////////////////////////////////// Teachers - Start //////////////////////////////////////////////////
-    public Teacher createTeacher(Scanner input) {
+    public void createTeacher(Scanner input, ArrayList<Teacher> teachers) {
         String name = "";
         boolean isValidName = false;
         String sex = "";
@@ -85,8 +91,14 @@ public class ProgramManager {
         } while (!isValidSalary);
 
         Teacher teacher = new Teacher(name, sex, subject, salary);
+        teachers.add(teacher);
+        String teacherData = "";
+        teacherData += name + " |";
+        teacherData += " " + sex + " |";
+        teacherData += " " + subject + " |";
+        teacherData += " " + salary + " |";
+        filesManager.writeToTeachersFile(teacherData, true);
         System.out.println("\nTeacher added successfully!\n");
-        return teacher;
     }
 
     public void viewTeachers(ArrayList<Teacher> teachers) {
@@ -138,7 +150,7 @@ public class ProgramManager {
 
     //////////////////////////////////////////////// Students - Start //////////////////////////////////////////////////
 
-    public Student createStudent(Scanner input) {
+    public void createStudent(Scanner input, ArrayList<Student> students) {
         String name = "";
         boolean isValidName = false;
         String sex = "";
@@ -195,9 +207,14 @@ public class ProgramManager {
         } while (!isValidFeesPaid);
 
         Student student = new Student(name, sex, fees, isFeesPaid);
+        students.add(student);
+        String studentData = "";
+        studentData += name + " |";
+        studentData += " " + sex + " |";
+        studentData += " " + fees + " |";
+        studentData += " " + isFeesPaid + " |";
+        filesManager.writeToStudentsFile(studentData, true);
         System.out.println("\nStudent added successfully!\n");
-
-        return student;
     }
 
     public void viewStudents(ArrayList<Student> students) {
@@ -282,7 +299,10 @@ public class ProgramManager {
 
         Expense expenseItem = new Expense(expenseName, expenseAmount);
         expenses.add(expenseItem);
-
+        String expenseData = "";
+        expenseData += expenseName + " |";
+        expenseData += " " + expenseAmount + " |";
+        filesManager.writeToFinancesFile(expenseData, true);
         System.out.println("Expense added successfully!");
 
     }
@@ -430,5 +450,6 @@ public class ProgramManager {
             System.out.print("~");
         }
     }
+
 
 }
