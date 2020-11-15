@@ -23,7 +23,7 @@
  */
 
 public class ParseDataFiles {
-    private FilesManager filesManager;
+    private final FilesManager filesManager;
 
 
     public ParseDataFiles(FilesManager filesManager) {

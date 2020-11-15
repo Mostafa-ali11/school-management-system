@@ -35,15 +35,15 @@ public class ProgramSections {
     private final ArrayList<Student> students = new ArrayList<>();
     private final ArrayList<Expense> expenses = new ArrayList<>();
     private final ParseDataFiles parseDataFiles;
-    private Scanner menuInput = new Scanner(System.in);
-    private Scanner personInput = new Scanner(System.in);
-    private ProgramManager programManager;
-    private FilesManager filesManager;
+    private final Scanner menuInput = new Scanner(System.in);
+    private final Scanner personInput = new Scanner(System.in);
+    private final ProgramManager programManager;
+    private final FilesManager filesManager;
 
 
     public ProgramSections(FilesManager filesManager) {
         this.filesManager = filesManager;
-        programManager = new ProgramManager(filesManager);
+        programManager = new ProgramManager();
         parseDataFiles = new ParseDataFiles(filesManager);
     }
 
@@ -75,7 +75,7 @@ public class ProgramSections {
                 financesMenu();
                 break;
             case 4:
-                saveDataFiles(expenses,students,teachers);
+                saveDataFiles(expenses, students, teachers);
                 System.out.println("Goodbye!");
                 System.exit(0);
                 break;
@@ -97,11 +97,11 @@ public class ProgramSections {
                     break;
                 case 2:
                     programManager.createTeacher(personInput, teachers);
-                    saveDataFiles(expenses,students,teachers);
+                    saveDataFiles(expenses, students, teachers);
                     break;
                 case 3:
                     programManager.removeTeacher(teachers, personInput);
-                    saveDataFiles(expenses,students,teachers);
+                    saveDataFiles(expenses, students, teachers);
                     break;
                 case 4:
                     leaveSection = true;
@@ -125,11 +125,11 @@ public class ProgramSections {
                     break;
                 case 2:
                     programManager.createStudent(personInput, students);
-                    saveDataFiles(expenses,students,teachers);
+                    saveDataFiles(expenses, students, teachers);
                     break;
                 case 3:
                     programManager.removeStudent(students, personInput);
-                    saveDataFiles(expenses,students,teachers);
+                    saveDataFiles(expenses, students, teachers);
                 case 4:
                     leaveSection = true;
                     break;
@@ -152,11 +152,11 @@ public class ProgramSections {
                     break;
                 case 2:
                     programManager.createExpense(personInput, expenses);
-                    saveDataFiles(expenses,students,teachers);
+                    saveDataFiles(expenses, students, teachers);
                     break;
                 case 3:
                     programManager.removeExpense(personInput, expenses);
-                    saveDataFiles(expenses,students,teachers);
+                    saveDataFiles(expenses, students, teachers);
                     break;
                 case 4:
                     leaveSection = true;

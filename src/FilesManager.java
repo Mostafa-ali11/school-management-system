@@ -40,9 +40,9 @@ public class FilesManager {
     private File studentsFile;
     private File teachersFile;
     private File financesFile;
-    private String teachersFileName;
-    private String studentsFileName;
-    private String financesFileName;
+    private final String teachersFileName;
+    private final String studentsFileName;
+    private final String financesFileName;
 
     public FilesManager(String studentsFileName, String teachersFileName, String financesFileName) {
         this.studentsFileName = studentsFileName;

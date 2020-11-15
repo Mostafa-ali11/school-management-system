@@ -25,10 +25,10 @@
 import java.util.Random;
 
 public class Person {
-    Random random = new Random();
     private final String name;
     private final String sex;
-    private String id = "";
+    Random random = new Random();
+    private String id;
 
     //Constructor
     public Person(String name, String sex) {
@@ -38,7 +38,6 @@ public class Person {
             id += String.valueOf(random.nextInt(10));
         }
     }
-
 
 
     public String getName() { // return normalized name

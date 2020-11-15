@@ -27,14 +27,6 @@ import java.util.Scanner;
 
 public class ProgramManager {
 
-    private final FilesManager filesManager;
-
-
-    public ProgramManager(FilesManager filesManager) {
-        this.filesManager = filesManager;
-
-    }
-
     //////////////////////////////////////////////// Teachers - Start //////////////////////////////////////////////////
     public void createTeacher(Scanner input, ArrayList<Teacher> teachers) {
         String name = "";
@@ -94,7 +86,6 @@ public class ProgramManager {
 
         Teacher teacher = new Teacher(name, sex, subject, salary);
         teachers.add(teacher);
-
         System.out.println("\nTeacher added successfully!\n");
     }
 
