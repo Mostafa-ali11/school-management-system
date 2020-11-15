@@ -23,7 +23,9 @@
  */
 // TODO: 11/14/2020 Handle the error cases
 // TODO: 11/14/2020 Create "data" directory if it doesn't exist
+
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
@@ -87,32 +89,20 @@ public class FilesManager {
         }
     }
 
-    public void writeToStudentsFile(String lineToWrite, boolean endsWithNewLine) {
-        if (endsWithNewLine) {
-            studentsFileWriter.println(lineToWrite);
-        } else {
-            studentsFileWriter.print(lineToWrite);
-        }
+    public void writeToStudentsFile(String lineToWrite) {
+        studentsFileWriter.println(lineToWrite);
 
         studentsFileWriter.flush();
     }
 
-    public void writeToTeachersFile(String lineToWrite, boolean endsWithNewLine) {
-        if (endsWithNewLine) {
-            teachersFileWriter.println(lineToWrite);
-        } else {
-            teachersFileWriter.print(lineToWrite);
-        }
+    public void writeToTeachersFile(String lineToWrite) {
+        teachersFileWriter.println(lineToWrite);
 
         teachersFileWriter.flush();
     }
 
-    public void writeToFinancesFile(String lineToWrite, boolean endsWithNewLine) {
-        if (endsWithNewLine) {
-            financesFileWriter.println(lineToWrite);
-        } else {
-            financesFileWriter.print(lineToWrite);
-        }
+    public void writeToFinancesFile(String lineToWrite) {
+        financesFileWriter.println(lineToWrite);
 
         financesFileWriter.flush();
     }
@@ -130,6 +120,36 @@ public class FilesManager {
             return teachersFileReader.nextLine().trim();
         } else {
             return null;
+        }
+    }
+
+    public String readNextLineFromFinancesFile() {
+        if (financesFileReader.hasNextLine()) {
+            return financesFileReader.nextLine().trim();
+        } else {
+            return null;
+        }
+    }
+
+    public void clearTeachersDataFile() {
+        try {
+            teachersFileWriter = new PrintWriter(teachersFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    public void clearStudentsDataFile() {
+        try {
+            studentsFileWriter = new PrintWriter(studentsFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    public void clearFinancesDataFile() {
+        try {
+            financesFileWriter = new PrintWriter(financesFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
     }
 

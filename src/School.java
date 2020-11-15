@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 
-// TODO: 11/10/2020 Add the ability to read and write to files to save data permanently.
 public class School {
     public static void main(String[] args) {
 
@@ -40,7 +39,7 @@ public class School {
         }
 
         FilesManager filesManager = new FilesManager(studentsFileName, teachersFileName, financesFileName);
-        Prompter prompter = new Prompter(filesManager);
-        prompter.startProgram();
+        ProgramSections programSections = new ProgramSections(filesManager);
+        programSections.startProgram();
     }
 }

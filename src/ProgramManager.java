@@ -21,8 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-// TODO: 11/14/2020 Populate array lists from data files
-// TODO: 11/14/2020 when removing items remove from both array lists and data files  
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -30,8 +29,10 @@ public class ProgramManager {
 
     private final FilesManager filesManager;
 
+
     public ProgramManager(FilesManager filesManager) {
         this.filesManager = filesManager;
+
     }
 
     //////////////////////////////////////////////// Teachers - Start //////////////////////////////////////////////////
@@ -93,12 +94,7 @@ public class ProgramManager {
 
         Teacher teacher = new Teacher(name, sex, subject, salary);
         teachers.add(teacher);
-        String teacherData = "";
-        teacherData += name + " |";
-        teacherData += " " + sex + " |";
-        teacherData += " " + subject + " |";
-        teacherData += " " + salary + " |";
-        filesManager.writeToTeachersFile(teacherData, true);
+
         System.out.println("\nTeacher added successfully!\n");
     }
 
@@ -209,12 +205,6 @@ public class ProgramManager {
 
         Student student = new Student(name, sex, fees, isFeesPaid);
         students.add(student);
-        String studentData = "";
-        studentData += name + " |";
-        studentData += " " + sex + " |";
-        studentData += " " + fees + " |";
-        studentData += " " + isFeesPaid + " |";
-        filesManager.writeToStudentsFile(studentData, true);
         System.out.println("\nStudent added successfully!\n");
     }
 
@@ -300,10 +290,6 @@ public class ProgramManager {
 
         Expense expenseItem = new Expense(expenseName, expenseAmount);
         expenses.add(expenseItem);
-        String expenseData = "";
-        expenseData += expenseName + " |";
-        expenseData += " " + expenseAmount + " |";
-        filesManager.writeToFinancesFile(expenseData, true);
         System.out.println("Expense added successfully!");
 
     }

@@ -25,7 +25,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Prompter {
+public class ProgramSections {
 
     private final ArrayList<String> mainMenu = new ArrayList<>(4);
     private final ArrayList<String> teachersMenu = new ArrayList<>(4);
@@ -34,12 +34,17 @@ public class Prompter {
     private final ArrayList<Teacher> teachers = new ArrayList<>();
     private final ArrayList<Student> students = new ArrayList<>();
     private final ArrayList<Expense> expenses = new ArrayList<>();
-    Scanner menuInput = new Scanner(System.in);
-    Scanner personInput = new Scanner(System.in);
-    ProgramManager programManager;
+    private final ParseDataFiles parseDataFiles;
+    private Scanner menuInput = new Scanner(System.in);
+    private Scanner personInput = new Scanner(System.in);
+    private ProgramManager programManager;
+    private FilesManager filesManager;
 
-    public Prompter(FilesManager filesManager) {
+
+    public ProgramSections(FilesManager filesManager) {
+        this.filesManager = filesManager;
         programManager = new ProgramManager(filesManager);
+        parseDataFiles = new ParseDataFiles(filesManager);
     }
 
     public void startProgram() {
@@ -48,6 +53,9 @@ public class Prompter {
         setTeachersMenu();
         setStudentsMenu();
         setFinancesMenu();
+        populateStudentsArrayList(students);
+        populateTeachersArrayList(teachers);
+        populateExpensesArrayList(expenses);
         mainMenu();
     }
 
@@ -67,6 +75,9 @@ public class Prompter {
                 financesMenu();
                 break;
             case 4:
+                saveTeachersDataFile(teachers);
+                saveStudentsDataFile(students);
+                saveFinancesDataFile(expenses);
                 System.out.println("Goodbye!");
                 System.exit(0);
                 break;
@@ -156,7 +167,7 @@ public class Prompter {
         mainMenu.add("Teachers");
         mainMenu.add("Students");
         mainMenu.add("Finances");
-        mainMenu.add("Exit");
+        mainMenu.add("Save & Exit");
     }
 
     private void setTeachersMenu() {
@@ -209,6 +220,65 @@ public class Prompter {
             }
         } while (!isValidOptionNumber);
         return optionNumber;
+    }
+
+
+    private void populateStudentsArrayList(ArrayList<Student> students) {
+        Student nextStudent = parseDataFiles.readNextStudent();
+        while (nextStudent != null) {
+            students.add(nextStudent);
+            nextStudent = parseDataFiles.readNextStudent();
+        }
+    }
+
+    private void populateTeachersArrayList(ArrayList<Teacher> teachers) {
+        Teacher nextTeacher = parseDataFiles.readNextTeacher();
+        while (nextTeacher != null) {
+            teachers.add(nextTeacher);
+            nextTeacher = parseDataFiles.readNextTeacher();
+        }
+    }
+
+    private void populateExpensesArrayList(ArrayList<Expense> expenses) {
+        Expense nextExpense = parseDataFiles.readNextExpense();
+        while (nextExpense != null) {
+            expenses.add(nextExpense);
+            nextExpense = parseDataFiles.readNextExpense();
+        }
+    }
+
+    private void saveTeachersDataFile(ArrayList<Teacher> teachers) {
+        filesManager.clearTeachersDataFile();
+        for (Teacher currentTeacher : teachers) {
+            String teacherData = "";
+            teacherData += currentTeacher.getName() + " |";
+            teacherData += " " + currentTeacher.getSex() + " /";
+            teacherData += " " + currentTeacher.getSubject() + " -";
+            teacherData += " " + currentTeacher.getSalary();
+            filesManager.writeToTeachersFile(teacherData);
+        }
+    }
+
+    private void saveStudentsDataFile(ArrayList<Student> students) {
+        filesManager.clearStudentsDataFile();
+        for (Student currentStudent : students) {
+            String studentData = "";
+            studentData += currentStudent.getName() + " |";
+            studentData += " " + currentStudent.getSex() + " /";
+            studentData += " " + currentStudent.getFees() + " -";
+            studentData += " " + currentStudent.isFeesPaid();
+            filesManager.writeToStudentsFile(studentData);
+        }
+    }
+
+    private void saveFinancesDataFile(ArrayList<Expense> expenses) {
+        filesManager.clearFinancesDataFile();
+        for (Expense currentStudent : expenses) {
+            String expenseData = "";
+            expenseData += currentStudent.getExpenseName() + " |";
+            expenseData += " " + currentStudent.getExpenseAmount();
+            filesManager.writeToFinancesFile(expenseData);
+        }
     }
 
 }
