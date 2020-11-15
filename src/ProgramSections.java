@@ -75,9 +75,7 @@ public class ProgramSections {
                 financesMenu();
                 break;
             case 4:
-                saveTeachersDataFile(teachers);
-                saveStudentsDataFile(students);
-                saveFinancesDataFile(expenses);
+                saveDataFiles(expenses,students,teachers);
                 System.out.println("Goodbye!");
                 System.exit(0);
                 break;
@@ -99,9 +97,11 @@ public class ProgramSections {
                     break;
                 case 2:
                     programManager.createTeacher(personInput, teachers);
+                    saveDataFiles(expenses,students,teachers);
                     break;
                 case 3:
                     programManager.removeTeacher(teachers, personInput);
+                    saveDataFiles(expenses,students,teachers);
                     break;
                 case 4:
                     leaveSection = true;
@@ -125,9 +125,11 @@ public class ProgramSections {
                     break;
                 case 2:
                     programManager.createStudent(personInput, students);
+                    saveDataFiles(expenses,students,teachers);
                     break;
                 case 3:
                     programManager.removeStudent(students, personInput);
+                    saveDataFiles(expenses,students,teachers);
                 case 4:
                     leaveSection = true;
                     break;
@@ -150,9 +152,11 @@ public class ProgramSections {
                     break;
                 case 2:
                     programManager.createExpense(personInput, expenses);
+                    saveDataFiles(expenses,students,teachers);
                     break;
                 case 3:
                     programManager.removeExpense(personInput, expenses);
+                    saveDataFiles(expenses,students,teachers);
                     break;
                 case 4:
                     leaveSection = true;
@@ -245,6 +249,12 @@ public class ProgramSections {
             expenses.add(nextExpense);
             nextExpense = parseDataFiles.readNextExpense();
         }
+    }
+
+    private void saveDataFiles(ArrayList<Expense> expenses, ArrayList<Student> students, ArrayList<Teacher> teachers) {
+        saveFinancesDataFile(expenses);
+        saveStudentsDataFile(students);
+        saveTeachersDataFile(teachers);
     }
 
     private void saveTeachersDataFile(ArrayList<Teacher> teachers) {

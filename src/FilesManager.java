@@ -138,6 +138,7 @@ public class FilesManager {
             e.printStackTrace();
         }
     }
+
     public void clearStudentsDataFile() {
         try {
             studentsFileWriter = new PrintWriter(studentsFile);
@@ -145,6 +146,7 @@ public class FilesManager {
             e.printStackTrace();
         }
     }
+
     public void clearFinancesDataFile() {
         try {
             financesFileWriter = new PrintWriter(financesFile);
